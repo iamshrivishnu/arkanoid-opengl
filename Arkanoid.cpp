@@ -7,6 +7,7 @@
 #include<GLUT/glut.h>
 using namespace std;
 
+//Declaring some of the constants
 float posXP = 0, posYP = 10, posZP = 0;
 float posXB = 0, posYB = 0, posZB = 0;
 float dx = 0, dy = 1.0;
