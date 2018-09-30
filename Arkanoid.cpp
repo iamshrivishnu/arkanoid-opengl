@@ -16,6 +16,7 @@ bool incx = false, incy = true;
 bool ballRel = false;
 bool pause = false;
 
+//Color added in array
 GLfloat paddle_color_array[][3] = { { 1,0,0 },{ 0,0,1 },{ 0,1,0 },{ 1,0,1 },{ 1,1,0 },{ 0,1,1 },{ 1,1,1 },{ 1,0.5,0 } };
 GLfloat brick_color_array[][3] = { { 1,0,0 },{ 0,0,1 },{ 0,1,0 },{ 1,0,1 },{ 1,1,0 },{ 0,1,1 },{ 1,1,1 },{ 1,0.5,0 } };
 GLfloat ball_color_array[][3] = { { 1,0,0 },{ 0,0,1 },{ 0,1,0 },{ 1,0,1 },{ 1,1,0 },{ 0,1,1 },{ 1,1,1 },{ 1,0.5,0 } };
@@ -34,11 +35,13 @@ int presentstate = 1;
 int score = 0;
 int windows[4];
 
+//Creating a Ball
 void ball() {
 	glColor3fv(ball_color_array[ball_color]);
 	glScalef(5, 5, 0);
 	glutSolidSphere(2.0, 100, 10);
 }
+//Creating a Paddle
 void paddle() {
 	glColor3fv(paddle_color_array[paddle_color]);
 	glBegin(GL_POLYGON);
@@ -52,6 +55,7 @@ void paddle() {
 		glVertex3f(10.0 + 10 * cosf(i*M_PI), 10 + 10 * sinf(i*M_PI), 0.0);
 	glEnd();
 }
+//Creating a Brick
 void block(float xv, float yv)
 {
 	glColor3fv(brick_color[brick_color_array]);
@@ -62,6 +66,7 @@ void block(float xv, float yv)
 	glVertex3f(0, yv, 0);
 	glEnd();
 }
+
 void button()
 {
 	glColor3f(0.25, 0.22, 0.11);
@@ -179,6 +184,7 @@ void detectblock() { //To detect if ball hits the paddle
 		}
 	}
 }
+//Functions for changing brick,ball and paddle color
 void change_paddle_color(int action)
 {
 	paddle_color = action - 1;
@@ -202,7 +208,7 @@ void change_ball_color(int action)
 void handle_menu(int action)
 {
 }
-
+//Drop Down  Menu for Changing Color
 void menus()
 {
 	if (presentstate == 2) {
@@ -245,6 +251,7 @@ void menus()
 		glutAttachMenu(GLUT_RIGHT_BUTTON);
 	}
 }
+//Display the starting screen
 void menudisplay() {
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
@@ -285,6 +292,7 @@ void menudisplay() {
 	writestring(GLUT_BITMAP_TIMES_ROMAN_24, displaystring, (0.35 * xmax) + 175.0, (0.25 * ymax) + 50.0);
 	glFlush();
 }
+//Display the game page
 void gamedisplay() {
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
@@ -325,6 +333,7 @@ void gamedisplay() {
 	glutPostRedisplay();
 	glFlush();
 }
+//Display the score page after playing
 void scoredisplay() {
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
@@ -363,7 +372,7 @@ void scoredisplay() {
 	glPopMatrix();
 	glFlush();
 }
-
+//Credits display
 void creditsdisplay() {
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
@@ -481,6 +490,7 @@ void passivefunction(int x, int y)
 		glutPostRedisplay();
 	}
 }
+//To control the paddle using mouse
 void mousefunction(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
@@ -546,7 +556,7 @@ void init()
 	glColor3f(1.0, 1.0, 1.0);
 	glOrtho(0.0, xmax, 0.0, ymax, 1.0, -1.0);
 }
-
+//Keyboard function to pause or resume the game
 void keyboardfunction(unsigned char key, int mousex, int mousey) {
 	switch (key) {
 	case '\r':if (presentstate == 3) {
@@ -566,7 +576,7 @@ void keyboardfunction(unsigned char key, int mousex, int mousey) {
 	default:;
 	}
 }
-
+//Main function to call other function 
 int main(int argc, char** argv)
 {
 	xmax = 1366;
